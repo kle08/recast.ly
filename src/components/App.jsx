@@ -15,12 +15,6 @@ class App extends React.Component {
       query: "react tutorial"
     };
 
-    this.options = {
-      key: YOUTUBE_API_KEY,
-      query: this.state.query,
-      max: 5
-    };
-
     this.whenClick = this.whenClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +22,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getVideos(this.options);
+    this.getVideos();
   }
 
   whenClick(selectedVideo) {
@@ -44,10 +38,16 @@ class App extends React.Component {
   }
 
   handleSubmit() {
-    this.getVideos(this.options);
+    this.getVideos();
   }
 
-  getVideos(options) {
+  getVideos() {
+    var options = {
+      key: YOUTUBE_API_KEY,
+      query: this.state.query,
+      max: 5
+    };
+
     searchYouTube(options, data => (
       console.log(data),
       this.setState({
