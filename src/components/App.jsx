@@ -14,9 +14,9 @@ class App extends React.Component {
     this.whenClick = this.whenClick.bind(this);
   }
 
-  whenClick(index) {
+  whenClick(selectedVideo) {
     this.setState({
-      currentVideo: this.state.videos[index]
+      currentVideo: selectedVideo
     });
 
   }
