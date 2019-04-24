@@ -1,4 +1,3 @@
-import searchYouTube from "../lib/searchYouTube.js";
 import Search from "./Search.js";
 import VideoList from "./VideoList.js";
 import VideoPlayer from "./VideoPlayer.js";
@@ -12,7 +11,7 @@ class App extends React.Component {
     this.state = {
       currentVideo: exampleVideoData[0],
       videos: exampleVideoData,
-      query: "react tutorial"
+      query: "pomeranian fail"
     };
 
     this.whenClick = this.whenClick.bind(this);
@@ -35,6 +34,9 @@ class App extends React.Component {
     this.setState({
       query: event.target.value
     });
+
+    var liveSearch = _.debounce(this.getVideos, 500, true);
+    liveSearch();
   }
 
   handleSubmit() {
@@ -48,8 +50,7 @@ class App extends React.Component {
       max: 5
     };
 
-    searchYouTube(options, data => (
-      console.log(data),
+    this.props.searchYouTube(options, data => (
       this.setState({
         videos: data,
         currentVideo: data[0]
